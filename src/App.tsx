@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import API from "./api";
 
 function App() {
   const [questions, setQuestions] = useState<any>();
 
   useEffect(() => {
-    fetch("/environment_questions")
-      .then((response) => response.json())
-      .then((data) => setQuestions(data));
+    const fetchQuestions = async () => {
+      setQuestions(await API.getQuestions());
+    };
+    fetchQuestions();
   }, []);
 
   return (
