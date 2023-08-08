@@ -1,5 +1,5 @@
 import { filterByDifficulties } from "./api.utils";
-import questions from "./tests/mock/questions";
+import questions from "../tests/mock/questions";
 
 describe("filterByDifficulties", () => {
   it("returns no questions if no questions are provided", () => {

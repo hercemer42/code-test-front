@@ -1,4 +1,4 @@
-import { filterByDifficulties } from "./api/api.utils";
+import { filterByDifficulties } from "./api.utils";
 
 const DIFFICULTIES: Array<{ difficulty: Difficulty; count: number }> = [
   {
