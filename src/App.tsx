@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import API from "./api";
+import Question from "./components/Question";
 
 function App() {
   const [questions, setQuestions] = useState<any>();
@@ -18,7 +19,12 @@ function App() {
         <h1 className="text-3xl font-bold text-center">
           Teste tes connaissances sur l'environnement
         </h1>
-        <div className="pt-20">{JSON.stringify(questions)}</div>
+        <div className="pt-20">
+          {questions &&
+            questions.map((question: Question) => (
+              <Question question={question} key={question.id} />
+            ))}
+        </div>
       </div>
     </div>
   );
