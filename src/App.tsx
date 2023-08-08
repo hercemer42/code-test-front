@@ -7,7 +7,7 @@ function App() {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      setQuestions(await API.getQuestions());
+      setQuestions(await API.getFiveRandomizedQuestions());
     };
     fetchQuestions();
   }, []);

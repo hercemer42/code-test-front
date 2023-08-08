@@ -1,7 +1,8 @@
 class API {
-  static async getQuestions(): Promise<Array<any>> {
+  static async getFiveRandomizedQuestions(): Promise<Array<any>> {
     const response = await fetch("/environment_questions");
     const questions = await response.json();
+    questions.sort(() => Math.random() - Math.random()).slice(0, 5);
     return questions;
   }
 }
