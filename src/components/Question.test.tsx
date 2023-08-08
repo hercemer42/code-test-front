@@ -11,4 +11,9 @@ test("renders Question", () => {
     const answerElement = screen.getByText(questions[0].answers[i].answer);
     expect(answerElement).toBeInTheDocument();
   }
+
+  const difficultyElement = screen.getByText(
+    questions[0].difficulty.toUpperCase()
+  );
+  expect(difficultyElement).toBeInTheDocument();
 });
