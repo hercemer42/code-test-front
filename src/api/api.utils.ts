@@ -38,5 +38,14 @@ export const filterByDifficulties = (
     },
     []
   );
-  return reduced;
+  // Finally, sort the questions by their difficulty easy -> medium -> hard
+  return reduced.sort((a, b) => {
+    if (a.difficulty === "easy") {
+      return -1;
+    }
+    if (a.difficulty === "medium" && b.difficulty === "hard") {
+      return -1;
+    }
+    return 1;
+  });
 };
