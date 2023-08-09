@@ -5,6 +5,11 @@ type Question = {
   difficulty: Difficulty;
 };
 
+type AnsweredQuestion = Question & {
+  userAnswer: ?number;
+  isCorrect: boolean;
+};
+
 type Answer = {
   id: number;
   answer: string;
@@ -14,4 +19,5 @@ type Difficulty = "easy" | "medium" | "hard";
 
 type QuizzStore = {
   isSubmitting: boolean;
+  questions: Array<AnsweredQuestion> | undefined;
 };

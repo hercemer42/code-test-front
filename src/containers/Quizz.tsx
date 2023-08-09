@@ -1,18 +1,14 @@
-import { useEffect, useState } from "react";
-import API from "../api";
+import { useEffect } from "react";
 import Question from "../components/Question";
 import SubmitButton from "../components/SubmitButton";
-import QuizzStore from "./QuizzStore";
+import QuizzStore, { fetchQuestions } from "./QuizzStore";
 
 const Quizz = () => {
   const isSubmitting = QuizzStore.useState((s) => s.isSubmitting);
-  const [questions, setQuestions] = useState<any>();
+  const [, finished, result] = fetchQuestions.useWatch();
 
   useEffect(() => {
-    const fetchQuestions = async () => {
-      setQuestions(await API.getFiveRandomizedQuestions());
-    };
-    fetchQuestions();
+    fetchQuestions.run();
   }, []);
 
   const submitQuizz = () => {
@@ -31,15 +27,15 @@ const Quizz = () => {
 
   return (
     <>
-      {questions && (
-        <>
-          {questions.map((question: Question) => (
+      {finished && result.payload?.questions && (
+        <form>
+          {result.payload.questions.map((question: Question) => (
             <Question question={question} key={question.id} />
           ))}
           <div className="pt-20 flex justify-end">
             <SubmitButton onClick={submitQuizz} disabled={isSubmitting} />
           </div>
-        </>
+        </form>
       )}
     </>
   );
