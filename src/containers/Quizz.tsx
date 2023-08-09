@@ -3,13 +3,13 @@ import Question from "../components/Question";
 import SubmitButton from "../components/SubmitButton";
 import QuizzStore, { fetchQuestions, submitAnswers } from "./QuizzStore";
 
-const Quizz = () => {
+const Quizz = ({ type }: { type: QuizzType }) => {
   const isSubmitting = QuizzStore.useState((s) => s.isSubmitting);
-  const score = QuizzStore.useState((s) => s.score);
-  const [, finished, result] = fetchQuestions.useWatch();
+  const score = QuizzStore.useState((s) => s.environment.score);
+  const [, finished, result] = fetchQuestions.useWatch({ type });
 
   useEffect(() => {
-    fetchQuestions.run();
+    fetchQuestions.run({ type });
   }, []);
 
   const submitQuizz = (e: any) => {
@@ -19,14 +19,14 @@ const Quizz = () => {
     });
 
     const formData = new FormData(e.target);
-    const apiAnswers: Array<ApiAnswer> = [];
+    const answers: Array<ApiAnswer> = [];
     formData.forEach((value, key) => {
-      apiAnswers.push({
+      answers.push({
         questionId: parseInt(key),
         answerId: parseInt(value.toString()),
       });
     });
-    submitAnswers.run(apiAnswers);
+    submitAnswers.run({ type, answers });
   };
 
   return (

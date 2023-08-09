@@ -7,7 +7,7 @@ const Environnement = () => {
         Teste tes connaissances sur l'environnement
       </h1>
       <div className="pt-20">
-        <Quizz />
+        <Quizz type="environment" />
       </div>
     </div>
   );

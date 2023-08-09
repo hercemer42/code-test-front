@@ -24,6 +24,10 @@ type Difficulty = "easy" | "medium" | "hard";
 
 type QuizzStore = {
   isSubmitting: boolean;
-  questions: Array<AnsweredQuestion> | undefined;
-  score: number | null;
+  environment: {
+    questions: Array<AnsweredQuestion> | undefined;
+    score: number | null;
+  };
 };
+
+type QuizzType = "environment";

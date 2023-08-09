@@ -16,8 +16,10 @@ const DIFFICULTIES: Array<{ difficulty: Difficulty; count: number }> = [
 ];
 
 class API {
-  static async getFiveRandomizedQuestions(): Promise<Array<Question>> {
-    const response = await fetch("/environment_questions");
+  static async getFiveRandomizedQuestions(
+    type: QuizzType
+  ): Promise<Array<Question>> {
+    const response = await fetch(`/${type}_questions`);
     const questions = await response.json();
     return filterByDifficulties(
       questions.sort(() => Math.random() - Math.random()),
@@ -25,7 +27,10 @@ class API {
     );
   }
 
-  static async submitAnswers(answers: Array<ApiAnswer>): Promise<any> {
+  static async submitAnswers(
+    type: QuizzType,
+    answers: Array<ApiAnswer>
+  ): Promise<any> {
     const response = await fetch("/environment_score", {
       method: "POST",
       body: JSON.stringify(answers),

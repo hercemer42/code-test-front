@@ -3,37 +3,39 @@ import API from "../api";
 
 const QuizzStore = new Store<QuizzStore>({
   isSubmitting: false,
-  questions: [],
-  score: null,
+  environment: {
+    questions: [],
+    score: null,
+  },
 });
 
 export default QuizzStore;
 
 export const fetchQuestions = createAsyncAction(
-  async () => {
-    const questions = await API.getFiveRandomizedQuestions();
+  async ({ type }: { type: QuizzType }) => {
+    const questions = await API.getFiveRandomizedQuestions(type);
     return successResult({ questions: questions });
   },
   {
     postActionHook: ({ result }) => {
       QuizzStore.update((s) => {
-        s.questions = result.payload?.questions as Array<AnsweredQuestion>;
+        s.environment.questions = result.payload
+          ?.questions as Array<AnsweredQuestion>;
       });
     },
   }
 );
 
-
 export const submitAnswers = createAsyncAction(
-  async (answers: Array<ApiAnswer>) => {
-    const score = await API.submitAnswers(answers);
+  async ({ type, answers }: { type: QuizzType; answers: Array<ApiAnswer> }) => {
+    const score = await API.submitAnswers(type, answers);
     return successResult({ score: score });
   },
   {
     postActionHook: ({ result }) => {
       QuizzStore.update((s) => {
         s.isSubmitting = false;
-        s.score = result.payload?.score as number;
+        s.environment.score = result.payload?.score as number;
       });
     },
   }
