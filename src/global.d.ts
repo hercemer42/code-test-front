@@ -11,3 +11,7 @@ type Answer = {
 };
 
 type Difficulty = "easy" | "medium" | "hard";
+
+type QuizzStore = {
+  isSubmitting: boolean;
+};
