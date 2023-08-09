@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Question from "../components/Question";
 import SubmitButton from "../components/SubmitButton";
-import QuizzStore, { fetchQuestions } from "./QuizzStore";
+import QuizzStore, { fetchQuestions, submitAnswers } from "./QuizzStore";
 
 const Quizz = () => {
   const isSubmitting = QuizzStore.useState((s) => s.isSubmitting);
@@ -18,14 +18,14 @@ const Quizz = () => {
     });
 
     const formData = new FormData(e.target);
+    const apiAnswers: Array<ApiAnswer> = [];
     formData.forEach((value, key) => {
-      console.log(key, value);
-    });
-    setTimeout(() => {
-      QuizzStore.update((s) => {
-        s.isSubmitting = false;
+      apiAnswers.push({
+        questionId: parseInt(key),
+        answerId: parseInt(value.toString()),
       });
-    }, 1000);
+    });
+    submitAnswers.run(apiAnswers);
   };
 
   return (
