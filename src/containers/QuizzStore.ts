@@ -23,8 +23,7 @@ export const fetchQuestions = createAsyncAction(
   {
     postActionHook: ({ result }) => {
       QuizzStore.update((s) => {
-        s.environment.questions = result.payload
-          ?.questions as Array<AnsweredQuestion>;
+        s.environment.questions = result.payload?.questions as Array<Question>;
       });
     },
   }

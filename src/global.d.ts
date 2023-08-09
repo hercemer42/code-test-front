@@ -5,11 +5,6 @@ type Question = {
   difficulty: Difficulty;
 };
 
-type AnsweredQuestion = Question & {
-  userAnswer: ?number;
-  isCorrect: boolean;
-};
-
 type Answer = {
   id: number;
   answer: string;
@@ -29,7 +24,7 @@ type QuizzStore = {
 };
 
 type Quizz = {
-  questions: Array<AnsweredQuestion> | undefined;
+  questions: Array<Question> | undefined;
   score: number | null;
 };
 
