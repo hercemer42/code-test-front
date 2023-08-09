@@ -7,6 +7,10 @@ const QuizzStore = new Store<QuizzStore>({
     questions: [],
     score: null,
   },
+  mitigation: {
+    questions: [],
+    score: null,
+  },
 });
 
 export default QuizzStore;

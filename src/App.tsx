@@ -1,6 +1,7 @@
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import "./App.css";
 import Environnement from "./routes/Environnement";
+import Mitigation from "./routes/Mitigation";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
             <Route path="/" element={<Environnement />}>
               <Route path="environnement" element={<Environnement />} />
             </Route>
+            <Route path="/mitigation" element={<Mitigation />} />
           </Routes>
         </div>
       </div>

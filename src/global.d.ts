@@ -24,10 +24,13 @@ type Difficulty = "easy" | "medium" | "hard";
 
 type QuizzStore = {
   isSubmitting: boolean;
-  environment: {
-    questions: Array<AnsweredQuestion> | undefined;
-    score: number | null;
-  };
+  environment: Quizz;
+  mitigation: Quizz;
 };
 
-type QuizzType = "environment";
+type Quizz = {
+  questions: Array<AnsweredQuestion> | undefined;
+  score: number | null;
+};
+
+type QuizzType = "environment" | "mitigation";
