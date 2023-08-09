@@ -11,13 +11,16 @@ const Quizz = () => {
     fetchQuestions.run();
   }, []);
 
-  const submitQuizz = () => {
+  const submitQuizz = (e: any) => {
+    e.preventDefault();
     QuizzStore.update((s) => {
       s.isSubmitting = true;
     });
 
-    console.log("Submit quizz");
-
+    const formData = new FormData(e.target);
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
     setTimeout(() => {
       QuizzStore.update((s) => {
         s.isSubmitting = false;
@@ -28,12 +31,12 @@ const Quizz = () => {
   return (
     <>
       {finished && result.payload?.questions && (
-        <form>
+        <form onSubmit={submitQuizz}>
           {result.payload.questions.map((question: Question) => (
             <Question question={question} key={question.id} />
           ))}
           <div className="pt-20 flex justify-end">
-            <SubmitButton onClick={submitQuizz} disabled={isSubmitting} />
+            <SubmitButton disabled={isSubmitting} />
           </div>
         </form>
       )}
