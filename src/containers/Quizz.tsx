@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import API from "../api";
 import Question from "../components/Question";
 import SubmitButton from "../components/SubmitButton";
+import QuizzStore from "./QuizzStore";
 
 const Quizz = () => {
+  const isSubmitting = QuizzStore.useState((s) => s.isSubmitting);
   const [questions, setQuestions] = useState<any>();
 
   useEffect(() => {
@@ -14,7 +16,17 @@ const Quizz = () => {
   }, []);
 
   const submitQuizz = () => {
-    console.log("submit");
+    QuizzStore.update((s) => {
+      s.isSubmitting = true;
+    });
+
+    console.log("Submit quizz");
+
+    setTimeout(() => {
+      QuizzStore.update((s) => {
+        s.isSubmitting = false;
+      });
+    }, 1000);
   };
 
   return (
@@ -25,7 +37,7 @@ const Quizz = () => {
             <Question question={question} key={question.id} />
           ))}
           <div className="pt-20 flex justify-end">
-            <SubmitButton onClick={submitQuizz} disabled={false} />
+            <SubmitButton onClick={submitQuizz} disabled={isSubmitting} />
           </div>
         </>
       )}
