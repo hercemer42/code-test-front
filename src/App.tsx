@@ -1,18 +1,7 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import API from "./api";
-import Question from "./components/Question";
+import Quizz from "./containers/Quizz";
 
 function App() {
-  const [questions, setQuestions] = useState<any>();
-
-  useEffect(() => {
-    const fetchQuestions = async () => {
-      setQuestions(await API.getFiveRandomizedQuestions());
-    };
-    fetchQuestions();
-  }, []);
-
   return (
     <div className="App px-4 sm:px-6 md:px-8 bg-gray-100">
       <div className="max-w-5xl mx-auto pt-20 pb-20 sm:pt-24 lg:pt-32">
@@ -20,10 +9,7 @@ function App() {
           Teste tes connaissances sur l'environnement
         </h1>
         <div className="pt-20">
-          {questions &&
-            questions.map((question: Question) => (
-              <Question question={question} key={question.id} />
-            ))}
+          <Quizz />
         </div>
       </div>
     </div>
