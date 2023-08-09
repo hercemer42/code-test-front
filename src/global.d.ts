@@ -15,6 +15,11 @@ type Answer = {
   answer: string;
 };
 
+type ApiAnswer = {
+  questionId: number;
+  answerId?: number;
+};
+
 type Difficulty = "easy" | "medium" | "hard";
 
 type QuizzStore = {

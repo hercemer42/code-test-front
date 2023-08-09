@@ -24,6 +24,18 @@ class API {
       DIFFICULTIES
     );
   }
+
+  static async submitAnswers(answers: Array<ApiAnswer>): Promise<any> {
+    const response = await fetch("/environment_score", {
+      method: "POST",
+      body: JSON.stringify(answers),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+    return result;
+  }
 }
 
 export default API;
