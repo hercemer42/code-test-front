@@ -52,7 +52,8 @@ const Answer = ({
       <input
         id={answerId}
         type="checkbox"
-        name={answerId}
+        name={questionId.toString()}
+        value={answer.id}
         onChange={() => onChange(answer.id)}
         checked={selected}
       />
