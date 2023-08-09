@@ -31,7 +31,7 @@ class API {
     type: QuizzType,
     answers: Array<ApiAnswer>
   ): Promise<any> {
-    const response = await fetch("/environment_score", {
+    const response = await fetch(`/${type}_score`, {
       method: "POST",
       body: JSON.stringify(answers),
       headers: {

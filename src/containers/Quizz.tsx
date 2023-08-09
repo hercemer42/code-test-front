@@ -5,12 +5,12 @@ import QuizzStore, { fetchQuestions, submitAnswers } from "./QuizzStore";
 
 const Quizz = ({ type }: { type: QuizzType }) => {
   const isSubmitting = QuizzStore.useState((s) => s.isSubmitting);
-  const score = QuizzStore.useState((s) => s.environment.score);
+  const score = QuizzStore.useState((s) => s[type].score);
   const [, finished, result] = fetchQuestions.useWatch({ type });
 
   useEffect(() => {
     fetchQuestions.run({ type });
-  }, []);
+  }, [type]);
 
   const submitQuizz = (e: any) => {
     e.preventDefault();
