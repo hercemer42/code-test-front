@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const SubmitButton = ({
   onClick,
   disabled = false,

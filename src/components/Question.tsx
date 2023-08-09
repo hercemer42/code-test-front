@@ -28,7 +28,7 @@ const Answers = ({ question }: { question: Question }) => {
           answer={answer}
           key={answer.id}
           onChange={onAnswerSelected}
-          selected={selectedAnswer == answer.id}
+          selected={selectedAnswer === answer.id}
         />
       ))}
     </div>
