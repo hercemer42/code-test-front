@@ -5,6 +5,7 @@ import QuizzStore, { fetchQuestions, submitAnswers } from "./QuizzStore";
 
 const Quizz = () => {
   const isSubmitting = QuizzStore.useState((s) => s.isSubmitting);
+  const score = QuizzStore.useState((s) => s.score);
   const [, finished, result] = fetchQuestions.useWatch();
 
   useEffect(() => {
@@ -35,7 +36,13 @@ const Quizz = () => {
           {result.payload.questions.map((question: Question) => (
             <Question question={question} key={question.id} />
           ))}
-          <div className="pt-20 flex justify-end">
+          <div className="pt-20 flex justify-end gap-4 items-center">
+            {score != null && (
+              <div className="text-gray-500">{`Tu as obtenu ${score} ${
+                score > 1 ? "points" : "point"
+              }`}</div>
+            )}
+
             <SubmitButton disabled={isSubmitting} />
           </div>
         </form>
